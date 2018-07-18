@@ -23,7 +23,7 @@ public class APISecurity extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
+		http.csrf().disable()
         .authorizeRequests().antMatchers("/emp-register/register/getAllUsers","/emp-register/register/saveNewUser").hasRole("admin")
         .antMatchers("/emp-register/login/getAllUsers","/emp-register/login/saveLogin").hasRole("admin")
         .antMatchers("/emp-register/**").hasAnyRole("admin","user")

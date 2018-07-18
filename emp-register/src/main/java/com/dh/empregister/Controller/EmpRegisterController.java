@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,17 +23,17 @@ public class EmpRegisterController {
 	@Autowired
 	private EmpRegisterService empService;
 
-	@RequestMapping(value="/saveNewUser",method=RequestMethod.POST)
+	@PostMapping(value="/saveNewUser")
 	public String saveNewUser(@RequestBody UserData userData){
 		return empService.saveNewUserService(userData);
 	}
 	
-	@RequestMapping(value="/getAllUsers",method=RequestMethod.GET)
+	@GetMapping(value="/getAllUsers")
 	public List<UserData> getAllUser(){
 		return empService.getAllUsers();
 	}
 	
-	@RequestMapping(value="/validate/{empId}",method=RequestMethod.GET)
+	@GetMapping(value="/validate/{empId}")
 	public Boolean findByEmpid(@PathVariable(value="empId")Integer empId){
 		return empService.getEmpById(empId)==null ? false : true;
 	}

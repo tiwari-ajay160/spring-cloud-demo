@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,22 +28,22 @@ public class Employee {
 	private EmpService employeeService;
 
 
-	@RequestMapping(value="/saveHours",method=RequestMethod.POST)
+	@PostMapping(value="/saveHours")
 	public List<String> saveWorkingHours(@RequestBody List<User> user){
 		return employeeService.saveWorkingHours(user);
 	}
 	
-	@RequestMapping(value="/empWorkingData/{empId}",method=RequestMethod.GET)
+	@GetMapping(value="/empWorkingData/{empId}")
 	public List<User> getAllWorkingData(@PathVariable(value="empId") Integer empId){
 		return employeeService.getAllEmpData(empId);
 	}
 	
-	@RequestMapping(value="/getEmpHours",method=RequestMethod.GET)
+	@GetMapping(value="/getEmpHours")
 	public Double getWorkingHours(@RequestParam(value="eid") Integer eid){
 		return employeeService.getWokringHoursByEmpId(eid);
 	}
 	
-	@RequestMapping(value="/allEmpAvg",method=RequestMethod.GET)
+	@GetMapping(value="/allEmpAvg")
 	public Map<Integer, Double> getAllEmpAvg(){
 		return employeeService.getAllEmpAverage();
 	}
